@@ -18,7 +18,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-fb
 
 # Only libX11 is optional right now
 RDEPEND="
-	>=dev-libs/glib-2.28:2
+	>=dev-libs/glib-2.36:2
 	>=sys-apps/dbus-1
 	x11-libs/libXi
 	x11-libs/libXtst

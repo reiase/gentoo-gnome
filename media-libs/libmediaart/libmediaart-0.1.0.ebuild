@@ -14,7 +14,7 @@ if [[ ${PV} = 9999 ]]; then
 	inherit gnome2-live
 else
 	RV=($(get_version_components))
-	SRC_URI="http://source.clutter-project.org/sources/${PN}/${RV[0]}.${RV[1]}/${P}.tar.xz"
+	SRC_URI="http://ftp.gnome.org/pub/gnome/sources/libmediaart/0.1/${P}.tar.xz"
 fi
 
 DESCRIPTION="Library tasked with managing, extracting and handling media art caches"

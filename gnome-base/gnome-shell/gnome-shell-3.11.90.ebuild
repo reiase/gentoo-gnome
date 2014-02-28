@@ -49,7 +49,7 @@ COMMON_DEPEND="
 	>=sys-auth/polkit-0.100[introspection]
 	>=x11-libs/libXfixes-5.0
 	x11-libs/libXtst
-	>=x11-wm/mutter-3.11.5[introspection]
+	>=x11-wm/mutter-3.11.90[introspection]
 	>=x11-libs/startup-notification-0.11
 
 	${PYTHON_DEPS}
@@ -127,9 +127,6 @@ src_prepare() {
 	# Fix automagic gnome-bluetooth dep, bug #398145
 	#FIXME
 	#epatch "${FILESDIR}/${PN}-3.10-bluetooth-flag.patch"
-
-	# Make networkmanager optional, bug #398593
-	#epatch "${FILESDIR}/${PN}-3.10-networkmanager-flag.patch"
 
 	epatch_user
 

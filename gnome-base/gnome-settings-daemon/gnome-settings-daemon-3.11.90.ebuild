@@ -20,6 +20,7 @@ REQUIRED_USE="
 "
 KEYWORDS="~alpha ~amd64 ~arm ~ppc ~ppc64 ~x86 ~x86-fbsd ~x86-freebsd ~amd64-linux ~x86-linux ~x86-solaris"
 
+# Gnome upower is mess... packages fails with 0.99 but this request 0.99
 COMMON_DEPEND="
 	>=dev-libs/glib-2.37.7:2
 	>=x11-libs/gtk+-3.7.8:3
@@ -31,7 +32,7 @@ COMMON_DEPEND="
 	>=media-libs/lcms-2.2:2
 	media-libs/libcanberra[gtk3]
 	>=media-sound/pulseaudio-2
-	>=sys-power/upower-0.9.99
+	>=sys-power/upower-0.99
 	x11-libs/cairo
 	x11-libs/gdk-pixbuf:2
 	>=x11-libs/libnotify-0.7.3:=
@@ -43,7 +44,7 @@ COMMON_DEPEND="
 	x11-libs/libXtst
 	x11-libs/libXxf86misc
 
-	>=app-misc/geoclue-2.1.0:2.0
+	>=app-misc/geoclue-2.1.2:2.0
 	>=dev-libs/libgweather-3.9.5:2
 	>=sci-geosciences/geocode-glib-3.10
 	>=sys-auth/polkit-0.103
@@ -94,8 +95,8 @@ src_prepare() {
 	use short-touchpad-timeout &&
 		epatch "${FILESDIR}/${PN}-3.7.90-short-touchpad-timeout.patch"
 
-	# Make colord and wacom optional; requires eautoreconf
-	epatch "${FILESDIR}/${PN}-3.10.2-optional.patch"
+	# FIXME
+	# epatch "${FILESDIR}/${PN}-3.10.2-optional.patch"
 
 	epatch_user
 	eautoreconf
