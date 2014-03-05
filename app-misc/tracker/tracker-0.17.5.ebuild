@@ -136,23 +136,23 @@ src_prepare() {
 
 	# Skip broken tests
 	# https://bugzilla.gnome.org/show_bug.cgi?id=699408
-	sed -e '\%/libtracker-common/file-utils/has_write_access_or_was_created%,+1 d' \
-		-i tests/libtracker-common/tracker-file-utils-test.c || die
+	#sed -e '\%/libtracker-common/file-utils/has_write_access_or_was_created%,+1 d' \
+	#	-i tests/libtracker-common/tracker-file-utils-test.c || die
 	# https://bugzilla.gnome.org/show_bug.cgi?id=699410
 	#sed -e '\%/libtracker-miner/tracker-password-provider/setting%,+1 d' \
 	#	-e '\%/libtracker-miner/tracker-password-provider/getting%,+1 d' \
 	#	-i tests/libtracker-miner/tracker-password-provider-test.c || die
 	# https://bugzilla.gnome.org/show_bug.cgi?id=699412
-	sed -e '/#if HAVE_TRACKER_FTS/,/#endif/ d' \
-		-i tests/libtracker-sparql/tracker-test.c || die
+	#sed -e '/#if HAVE_TRACKER_FTS/,/#endif/ d' \
+	#	-i tests/libtracker-sparql/tracker-test.c || die
 	# https://bugzilla.gnome.org/show_bug.cgi?id=699412
-	sed -e 's/\({ "本州最主流的风味",.*TRUE,  \) 8/\1 5/' \
-		-e 's/\({ "ホモ・サピエンス.*TRUE, \) 13/\1 10/' \
-		-i tests/libtracker-fts/tracker-parser-test.c || die
+	#sed -e 's/\({ "本州最主流的风味",.*TRUE,  \) 8/\1 5/' \
+	#	-e 's/\({ "ホモ・サピエンス.*TRUE, \) 13/\1 10/' \
+	#	-i tests/libtracker-fts/tracker-parser-test.c || die
 	# Fails inside portage, not outside
 	# https://bugzilla.gnome.org/show_bug.cgi?id=699413
-	sed -e '\%/steroids/tracker/tracker_sparql_update_async%,+3 d' \
-		-i tests/tracker-steroids/tracker-test.c || die
+	#sed -e '\%/steroids/tracker/tracker_sparql_update_async%,+3 d' \
+	#	-i tests/tracker-steroids/tracker-test.c || die
 
 	eautoreconf # See bug #367975
 	gnome2_src_prepare

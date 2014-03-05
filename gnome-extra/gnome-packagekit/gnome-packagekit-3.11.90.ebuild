@@ -4,9 +4,8 @@
 
 EAPI="5"
 GCONF_DEBUG="no"
-PYTHON_COMPAT=( python2_{6,7} python3_{2,3} )
 
-inherit eutils gnome2 python-r1 virtualx
+inherit eutils gnome2 virtualx
 
 DESCRIPTION="PackageKit client for the GNOME desktop"
 HOMEPAGE="http://www.packagekit.org/"
@@ -73,18 +72,10 @@ src_prepare() {
 		-e '/gpk_task_test (test)/d' \
 		-i src/gpk-self-test.c || die
 
-	# Leave python build to us
-	sed '/python.*\\/d' -i Makefile.am Makefile.in || die
-
 	# Disable stupid flags
 	# FIXME: touching configure.ac triggers maintainer-mode
 	sed -e '/CPPFLAGS="$CPPFLAGS -g"/d' -i configure || die
 
-	mkdir -p "${S}_default" || die
-	prepare_python() {
-		mkdir -p "${BUILD_DIR}" || die
-	}
-	python_foreach_impl prepare_python
 	gnome2_src_prepare
 }
 
@@ -101,25 +92,15 @@ src_configure() {
 		$(use_enable udev gudev)
 		ITSTOOL=$(type -P true)"
 
-	cd "${S}_default" || die
 	ECONF_SOURCE="${S}" gnome2_src_configure ${myconf}
-	ECONF_SOURCE="${S}" python_foreach_impl run_in_build_dir \
-		gnome2_src_configure ${myconf}
 }
 
 src_compile() {
-	cd "${S}_default" || die
 	gnome2_src_compile
-	build_python() {
-		cd "${BUILD_DIR}"/python || die
-		default
-	}
-	python_foreach_impl build_python
 }
 
 src_test() {
 	unset DISPLAY
-	cd "${S}_default" || die
 	# out-of-tree tests of documentation fail
 	Xemake check -C src
 }
@@ -127,12 +108,5 @@ src_test() {
 src_install() {
 	dodoc AUTHORS MAINTAINERS NEWS README TODO
 
-	cd "${S}_default" || die
 	gnome2_src_install
-
-	install_python() {
-		cd "${BUILD_DIR}"/python || die
-		emake install DESTDIR="${D}" VPATH="${S}/python/packagekit:${BUILD_DIR}" || die
-	}
-	python_foreach_impl install_python
 }
